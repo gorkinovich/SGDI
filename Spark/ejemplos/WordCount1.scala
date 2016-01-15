@@ -1,0 +1,5 @@
+var wc_words = sc.textFile("input/4-Hamlet.txt").flatMap(_.split(" "))
+var wc_count = wc_words.map((_, 1)).reduceByKey(_+_)
+var wc_sresult = wc_count.sortBy({case (k,v) => v}, false)
+var wc_outfile = scala.tools.nsc.io.File("output/WordCount.txt")
+wc_outfile.writeAll(wc_sresult.collect().mkString("\n"))
